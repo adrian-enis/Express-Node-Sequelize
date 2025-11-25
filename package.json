@@ -11,8 +11,16 @@
   "license": "ISC",
   "packageManager": "pnpm@10.17.1",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7"
+  },
+  "pnpm": {
+    "overrides": {
+      "body-parser": "^2.2.1"
+    }
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
