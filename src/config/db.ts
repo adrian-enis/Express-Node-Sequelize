@@ -1,10 +1,11 @@
-import { Sequelize } from "sequelize";
 import dotenv from "dotenv"
-
+import { Sequelize } from "sequelize-typescript";
+import { join } from "path";
 
 dotenv.config()
-                     //El signo de exclamacion asegura que el archivo estara alli
-const db = new Sequelize("postgresql://restapiandnodeandtsandsequelize_user:IdEvRtzDOAuY0sLs6ZYQKz3Rs4yrAQaH@dpg-d4ieccur433s739uqsog-a.virginia-postgres.render.com/restapiandnodeandtsandsequelize",{
+const db = new Sequelize(process.env.DATABASE_URL!,{ //El signo de exclamacion asegura que el archivo estara alli
+  models:[join(__dirname, "../models")],              //Uso join(__dirname), para construir la ruta absoluta 
+
   dialect: "postgres",
   dialectOptions: {
     ssl: {

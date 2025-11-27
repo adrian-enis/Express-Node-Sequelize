@@ -10,6 +10,8 @@
     "esModuleInterop": true,    //  Define que ts logre importar modulos CommonJS usando la sintaxis de ESModules (import)
     "declaration": true,        // Define los tipos de definicion (si creas una libreria o paquete npm, los consumidores
                                 //  Podran tener autocompletado y validacion de datos)
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "types": ["node"]

@@ -1,3 +1,4 @@
+import colors from "colors"
 import express from "express"     // Funcion ejecutable
 import { Express } from "express" //type interface
 import router from "./Routes/routes"
@@ -11,11 +12,11 @@ async function connectDB() {
         await db.authenticate()          // authentication to DB
 
         await db.sync()                       //  Wait for new columns
-        console.log("Database connected and synced successfully");
+        console.log(colors.blue.bold("Database connected and synced successfully"));
                    
     } catch (error) {
         console.log(error)
-        console.log("There was an error connecting to the database")
+        console.log(colors.red.bold("There was an error connecting to the database"));
     }
 }
 connectDB()

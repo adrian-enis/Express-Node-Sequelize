@@ -1,3 +1,4 @@
+import colors from "colors"
 import server from "./server";
 
 
@@ -6,7 +7,7 @@ import server from "./server";
  * hacerlo escuchar conexiones entrantes
  * en un puerto especifico
  */
-
+const port = process.env.PORT || 4000;
 server.listen(4000, () => {
-    console.log(`RES API en el puerto 4000`)
+    console.log(colors.cyan.bold(`RES API en el puerto ${port}`))
 })
