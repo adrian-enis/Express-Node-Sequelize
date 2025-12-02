@@ -26,6 +26,9 @@ connectDB()
 //const server = express();
 const server: Express = express()
 
+//Read Database Form
+server.use(express.json())
+
 //Server.use, registra las rutas o middleware en la app
 server.use("/api/products", router)
 

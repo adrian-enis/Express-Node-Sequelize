@@ -1,4 +1,6 @@
 import { Router, type IRouter } from "express"
+import { body } from "express-validator"
+import { createProduct } from "../handlers/product"
 
 
 //Esto le dice a TypeScript que router es del tipo IRouter, que es el tipo público y portable para routers en Express.
@@ -20,9 +22,17 @@ router.get("/", (req, res) => {             //Cada req - res, tiene sus propios 
 })
 
         /** POST **/
-router.post("/", (req, res) => {             
-    res.json("Desde POST")
-})
+router.post("/",
+        body("name")
+            .notEmpty().withMessage("The product name cannot be empty."),
+     
+        body("price")
+        .isNumeric().withMessage("invalid value").notEmpty()
+        .custom(value => value > 0).withMessage("Invalid value")
+        .withMessage("The product price cannot be empty."),
+    
+
+    createProduct )
 
         /** PUT **/
 router.put("/", (req, res) => {             

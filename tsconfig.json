@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-        "outDir": "./dist",     // Donde se compila los cambios
-        "rootDir": "./src",     // Donde encuentra los archivos
-    "target": "ES2020",         // Define como se transpila codigo de ts a js
-    "lib": ["esnext"],          // Define que apis estan disponibles para el compilador
+    "outDir": "./dist", // Donde se compila los cambios
+    "rootDir": "./src", // Donde encuentra los archivos
+    "target": "esnext", // Define como se transpila codigo de ts a js
+    "lib": ["esnext"], // Define que apis estan disponibles para el compilador
     "module": "CommonJS",
-    "strict": false,            //  Define el modo estricto
-    "sourceMap": true,          //  Define una forma de hacer debugger en el navegador
-    "esModuleInterop": true,    //  Define que ts logre importar modulos CommonJS usando la sintaxis de ESModules (import)
-    "declaration": true,        // Define los tipos de definicion (si creas una libreria o paquete npm, los consumidores
-                                //  Podran tener autocompletado y validacion de datos)
-    "experimentalDecorators": true,
+    "strict": false, //  Define el modo estricto
+    "sourceMap": true, //  Define una forma de hacer debugger en el navegador
+    "esModuleInterop": true, //  Define que ts logre importar modulos CommonJS usando la sintaxis de ESModules (import)
+    "declaration": true, // Define los tipos de definicion (si creas una libreria o paquete npm, los consumidores
+    //  Podran tener autocompletado y validacion de datos)
+    "experimentalDecorators": true, //- Permite que TypeScript genere metadatos adicionales cuando usas decoradores
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts"]      
+  "include": ["src/**/*.ts"]
 }
