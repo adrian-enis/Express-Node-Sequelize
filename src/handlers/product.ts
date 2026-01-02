@@ -6,6 +6,7 @@ import Product from "../models/Product.model";
 export const getProducts = async (req: Request, res: Response) => {
   try {
     const products = await Product.findAll({
+      where:{visible:true},
       order: [["id", "DESC"]],
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
@@ -17,6 +18,7 @@ export const getProducts = async (req: Request, res: Response) => {
 export const getProductById = async (req: Request, res: Response) => {
   try {
     console.log(req.params.id); // Get ID by parameter
+      
     const { id } = req.params;
     const product = await Product.findByPk(id);
     if (!product) {
@@ -56,6 +58,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 
 //UPDATE AVAILABILITY
 
+
 export const updateAvailability = async (req: Request, res: Response) => {
   const { id } = req.params;
   const product = await Product.findByPk(id);
@@ -64,9 +67,26 @@ export const updateAvailability = async (req: Request, res: Response) => {
       error: "Product not found",
     });
   }
-  const productUpdate = {...product.dataValues, "availability": !product.dataValues.availability}   
-  await product.update(productUpdate)
+
+  product.availability = !product.dataValues.availability
+  await product.save()
+  console.log(product.dataValues.availability)
+  res.json({data: product})
+
+}
+
+//DELETE PRODUCT
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const product = await Product.findByPk(id);
+  if (!product) {
+    return res.status(404).json({
+      error: "Product not found",
+    });
+  }
+
+  product.visible = false;
   await product.save();
-  console.log(product.dataValues)
-  res.json({ data: product });
-};
+  res.json({data: "Product successfully removed", product})
+}

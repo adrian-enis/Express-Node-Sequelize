@@ -20,6 +20,12 @@ class Product extends Model {
         type:DataType.BOOLEAN
     })
     declare availability:boolean
+
+    @Default(true)
+    @Column({
+        type:DataType.BOOLEAN
+    })
+    declare visible:boolean
 }
 
 export default Product

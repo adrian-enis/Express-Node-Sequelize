@@ -1,6 +1,13 @@
 import { Router, type IRouter } from "express";
 import { body, param } from "express-validator";
-import { createProduct, getProducts, getProductById, updateProduct, updateAvailability } from "../handlers/product";
+import {
+  createProduct,
+  getProducts,
+  getProductById,
+  updateProduct,
+  updateAvailability,
+  deleteProduct,
+} from "../handlers/product";
 import { handleInputErrors } from "../middleware";
 
 //Esto le dice a TypeScript que router es del tipo IRouter, que es el tipo público y portable para routers en Express.
@@ -19,10 +26,12 @@ const router: IRouter = Router();
 router.get("/", getProducts);
 
 /** GET By ID **/
-router.get("/:id",
+router.get(
+  "/:id",
   param("id").isInt().withMessage("Invalid ID"),
-  getProductById  //Dinamic Routing express
- );
+  handleInputErrors,
+  getProductById //Dinamic Routing express
+);
 
 /** POST **/
 router.post(
@@ -40,7 +49,9 @@ router.post(
 );
 
 /** PUT **/
-router.put("/:id", 
+router.put(
+  "/:id",
+  param("id").isInt().withMessage("Invalid ID"),
   body("name").notEmpty().withMessage("The product name cannot be empty."),
   body("price")
     .isNumeric()
@@ -50,17 +61,27 @@ router.put("/:id",
     .withMessage("Invalid value")
     .withMessage("The product price cannot be empty."),
   body("availability")
-    .isBoolean().withMessage("Value for availability not valid"),
-  handleInputErrors,  
+    .isBoolean()
+    .withMessage("Value for availability not valid"),
+  handleInputErrors,
   updateProduct
 );
 
 /** PATCH **/
-router.patch("/:id", updateAvailability);
+router.patch(
+  "/:id",
+  param("id").isInt().withMessage("Invalid ID"),
+  handleInputErrors,
+  updateAvailability
+);
 
 /** DELETE **/
-router.delete("/", (req, res) => {
-  res.json("Desde DELETE");
-});
+router.delete(
+  "/:id",
+  param("id").isInt().withMessage("Invalid ID"),
+  handleInputErrors,
+  deleteProduct
+
+);
 
 export default router;
